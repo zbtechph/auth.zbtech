@@ -6,6 +6,9 @@ php:
 
 before_script:
     - composer install --no-interaction
+    - cp .env.travis .env
+    - touch storage/travis.sqlite
+    - ./artisan key:generate
     
 script:
     - ./artisan test
