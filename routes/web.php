@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function(){
     Route::get('login', "Login@showForm")->name('login');
-    Route::post('login', "Login@attemptLogin")->name('attemptLogin');
+    Route::post('login', "Login@authenticate")->name('authenticate');
     Route::get('register', "Register@showForm")->name('register');
     Route::post('register', "Register@attemptRegister")->name("attemptRegister");
 });

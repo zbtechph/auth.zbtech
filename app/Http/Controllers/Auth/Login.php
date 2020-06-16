@@ -11,7 +11,24 @@ class Login extends Controller
 {
 
     public function showForm(){
-        return "";
+        return view("auth.login-form");
+    }
+    
+    public function authenticate(Request $req){
+        
+        $credentials = $req->validate([
+            'email' => [ 'required','email:rfc' ],
+            'password' => [ 'required' ]
+        ]);
+        
+        //$credentials = $req->only('email', 'password');
+        
+        if(Auth::check() OR Auth::attempt($credentials)){
+            // just return ok for now
+            return "OK";
+        } else {
+            abort(403);
+        }
     }
     
 }
