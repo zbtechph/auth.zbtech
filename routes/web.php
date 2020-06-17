@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function(){
-    Route::get('login', "Login@showForm")->name('login');
-    Route::post('login', "Login@authenticate")->name('authenticate');
-    Route::get('register', "Register@showForm")->name('register');
-    Route::post('register', "Register@attemptRegister")->name("attemptRegister");
+    Route::get('login', "LoginController@showForm")->name('login');
+    Route::post('login', "LoginController@authenticate")->name('authenticate');
+    Route::post('logout', "LoginController@logout")->name('logout');
+    Route::get('register', "RegisterController@showForm")->name('register');
+    Route::post('register', "RegisterController@attemptRegister")->name("attemptRegister");
 });
 
 Route::redirect('/login', "auth/login")->name('login');

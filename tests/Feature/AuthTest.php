@@ -68,4 +68,15 @@ class AuthTest extends TestCase
         $response->assertSessionHasErrors('password');
     }
     
+    /** @test*/
+    public function authenticatedUserCanLogout(){
+        
+        $user = factory(User::class)->create();
+        
+        $response = $this->actingAs($user)->post('/auth/logout');
+        
+        $this->assertGuest();
+        
+    }
+    
 }

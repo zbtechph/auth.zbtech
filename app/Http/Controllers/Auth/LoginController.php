@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-class Login extends Controller
+class LoginController extends Controller
 {
 
     public function showForm(){
@@ -25,6 +25,15 @@ class Login extends Controller
         
         if(Auth::check() OR Auth::attempt($credentials)){
             // just return ok for now
+            return "OK";
+        } else {
+            abort(403);
+        }
+    }
+    
+    public function logout(){
+        if(Auth::check()){
+            Auth::logout();
             return "OK";
         } else {
             abort(403);
