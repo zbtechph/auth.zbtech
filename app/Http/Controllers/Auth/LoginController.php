@@ -18,7 +18,7 @@ class LoginController extends Controller
         
         $credentials = $req->validate([
             'email' => [ 'required','email:rfc' ],
-            'password' => [ 'required' ]
+            'password' => [ 'required', 'min:6' ]
         ]);
         
         //$credentials = $req->only('email', 'password');

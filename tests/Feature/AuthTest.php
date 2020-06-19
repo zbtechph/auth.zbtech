@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
@@ -51,7 +50,7 @@ class AuthTest extends TestCase
     /** @test */
     public function loginEmailIsRequired(){
         $response = $this->post('/auth/login', [
-            //'email' => '',
+            'email' => '',
             'password' => 'password',
         ]);
         
@@ -62,13 +61,23 @@ class AuthTest extends TestCase
     public function loginPasswordIsRequired(){
         $response = $this->post('/auth/login', [
             'email' => 'random@email.com',
-            //'password' => '',
+            'password' => '',
         ]);
         
         $response->assertSessionHasErrors('password');
     }
     
-    /** @test*/
+    /** @test */
+    public function loginPasswordShouldBeAtleast6Characters(){
+        $response = $this->post('/auth/login', [
+            'email' => 'random@email.com',
+            'password' => '12345'
+        ]);
+        
+        $response->assertSessionHasErrors('password');
+    }
+    
+    /** @test */
     public function authenticatedUserCanLogout(){
         
         $user = factory(User::class)->create();
